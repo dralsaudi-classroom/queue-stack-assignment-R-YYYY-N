@@ -9,11 +9,15 @@ public class QueueStackTester {
         // the second queue. The original queue should remain unchanged at the end of the
         // method.
         // Example. Given the queue (A, B, C, D, E), split results in oq (A, C, E), and eq(B, D).
-    	for(int i = 0; i < q.length(); i++) {
+    	int length = q.length();
+    	T tmp;
+    	for(int i = 0; i < length; i++) {
+    		tmp = q.serve();
     		if(i % 2 == 0)
-    			eq.enqueue(q.serve());
+    			eq.enqueue(tmp);
     		else
-    			oq.enqueue(q.serve());
+    			oq.enqueue(tmp);
+    		q.enqueue(tmp);
     	}
     }
     
@@ -59,19 +63,32 @@ public class QueueStackTester {
     	return x + y;
     }
     
-    public static void main(String args[]) {
-    	ArrayStack<Integer> as = new ArrayStack<Integer>(10);
-    	LinkedStack<Integer> ls = new LinkedStack<Integer>();
-    	as.push(1);
-    	as.push(2);
-    	as.push(3);
-    	as.push(4);
-    	System.out.println(stackSum(as));
-    	ls.push(1);
-    	ls.push(2);
-    	ls.push(3);
-    	ls.push(4);
-    	ls.push(5);
-    	System.out.println(stackSum(ls));
+    public static <T> void printQueue(Queue<T> q) {
+    	T tmp;
+    	int length = q.length();
+    	for(int i = 0; i < length; i++) {
+    		tmp = q.serve();
+    		if(i != length - 1)
+    			System.out.print(tmp + " -> ");
+    		else
+    			System.out.println(tmp);
+    		q.enqueue(tmp);
+    	}
     }
+    
+//    public static void main(String args[]) {
+//    	LinkedQueue <Character> q = new LinkedQueue <Character>(), oq = new LinkedQueue <Character>(), eq = new LinkedQueue <Character>();
+//    	q.enqueue('A');
+//    	q.enqueue('B');
+//    	q.enqueue('C');
+//    	q.enqueue('D');
+//    	q.enqueue('E');
+//    	printQueue(q);
+//    	split(q, oq, eq);
+//    	System.out.print("ODD:  ");
+//    	printQueue(oq);
+//    	System.out.print("EVEN: ");
+//    	printQueue(eq);
+//    	
+//    }
 }
