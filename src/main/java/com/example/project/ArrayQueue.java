@@ -31,4 +31,12 @@ public class ArrayQueue<T> implements Queue<T> {
         size--;
         return e;
     }
+    
+    public void print() {
+    	int tmp = head;
+    	for(int i = 0; i < size; i++) {
+    		System.out.println(nodes[tmp]);
+    		tmp = (tmp + 1) % maxsize;
+    	}
+    }
 }
