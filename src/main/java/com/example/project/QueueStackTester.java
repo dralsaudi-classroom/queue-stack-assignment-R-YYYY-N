@@ -10,6 +10,7 @@ public class QueueStackTester {
         // method.
         // Example. Given the queue (A, B, C, D, E), split results in oq (A, C, E), and eq(B, D).
     	int length = q.length();
+    	System.out.println(length);
     	T tmp;
     	for(int i = 0; i < length; i++) {
     		tmp = q.serve();
@@ -40,42 +41,42 @@ public class QueueStackTester {
         // true while search(st, 1) returns false.
     }
     
-    public static boolean isOrdered(Queue<Integer> q) {
-    	boolean flag = true;
-    	int e1 = q.serve();
-    	q.enqueue(e1);
-    	for (int i = 1; i < q.length(); i++) {
-    		int e2 = q.serve();
-    		q.enqueue(e2);
-    		if(e1 > e2)
-    			flag = false;
-    		e1 = e2;
-    	}
-    	return flag;
-    }
-    
-    public static int stackSum(Stack<Integer> st) {
-    	if(st.empty())
-    		return 0;
-    	int x = st.pop();
-    	int y = stackSum(st);
-    	st.push(x);
-    	return x + y;
-    }
-    
-    public static <T> void printQueue(Queue<T> q) {
-    	T tmp;
-    	int length = q.length();
-    	for(int i = 0; i < length; i++) {
-    		tmp = q.serve();
-    		if(i != length - 1)
-    			System.out.print(tmp + " -> ");
-    		else
-    			System.out.println(tmp);
-    		q.enqueue(tmp);
-    	}
-    }
-    
+//    public static boolean isOrdered(Queue<Integer> q) {
+//    	boolean flag = true;
+//    	int e1 = q.serve();
+//    	q.enqueue(e1);
+//    	for (int i = 1; i < q.length(); i++) {
+//    		int e2 = q.serve();
+//    		q.enqueue(e2);
+//    		if(e1 > e2)
+//    			flag = false;
+//    		e1 = e2;
+//    	}
+//    	return flag;
+//    }
+//    
+//    public static int stackSum(Stack<Integer> st) {
+//    	if(st.empty())
+//    		return 0;
+//    	int x = st.pop();
+//    	int y = stackSum(st);
+//    	st.push(x);
+//    	return x + y;
+//    }
+//    
+//    public static <T> void printQueue(Queue<T> q) {
+//    	T tmp;
+//    	int length = q.length();
+//    	for(int i = 0; i < length; i++) {
+//    		tmp = q.serve();
+//    		if(i != length - 1)
+//    			System.out.print(tmp + " -> ");
+//    		else
+//    			System.out.println(tmp);
+//    		q.enqueue(tmp);
+//    	}
+//    }
+//    
 //    public static void main(String args[]) {
 //    	LinkedQueue <Character> q = new LinkedQueue <Character>(), oq = new LinkedQueue <Character>(), eq = new LinkedQueue <Character>();
 //    	q.enqueue('A');
@@ -89,6 +90,6 @@ public class QueueStackTester {
 //    	printQueue(oq);
 //    	System.out.print("EVEN: ");
 //    	printQueue(eq);
-//    	
+//    	printQueue(q);
 //    }
 }
