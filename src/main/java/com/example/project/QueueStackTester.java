@@ -9,8 +9,9 @@ public class QueueStackTester {
         // the second queue. The original queue should remain unchanged at the end of the
         // method.
         // Example. Given the queue (A, B, C, D, E), split results in oq (A, C, E), and eq(B, D).
+    	if(q.length() == 0)
+    		return;
     	int length = q.length();
-    	System.out.println(length);
     	T tmp;
     	for(int i = 0; i < length; i++) {
     		tmp = q.serve();
