@@ -33,10 +33,16 @@ public class QueueStackTester {
     		return;
     	int length = pq.length();
     	PQElement<T> pqe;
+    	LinkedPQ<T> tmpQ = new LinkedPQ<T>();
     	for(int i = 0; i < length; i++) {
     		pqe = pq.serve();
     		if(pqe.p >= p)
-    			pq.enqueue(pqe.data, pqe.p);
+    			tmpQ.enqueue(pqe.data, pqe.p);
+    	}
+    	length = tmpQ.length();
+    	for(int i = 0; i < length; i++) {
+    		pqe = tmpQ.serve();
+    		pq.enqueue(pqe.data, pqe.p);
     	}
     }
     
@@ -86,19 +92,36 @@ public class QueueStackTester {
     	}
     }
     
+    public static <T> void printPQ(LinkedPQ<T> pq) {
+    	PQElement<T> tmp;
+    	LinkedPQ<T> tmpQ = new LinkedPQ<T>();
+    	int length = pq.length();
+    	for(int i = 0; i < length; i++) {
+    		tmp = pq.serve();
+    		if(i != length - 1)
+    			System.out.print("[" + tmp.data + ", " + tmp.p + "] -> ");
+    		else
+    			System.out.println("[" + tmp.data + ", " + tmp.p + "]");
+    		tmpQ.enqueue(tmp.data, tmp.p);
+    	}
+    	
+    	for(int i = 0; i < length; i++) {
+    		tmp = tmpQ.serve();
+    		pq.enqueue(tmp.data, tmp.p);
+    	}
+    }
+    
     public static void main(String args[]) {
-    	LinkedQueue <Character> q = new LinkedQueue <Character>(), oq = new LinkedQueue <Character>(), eq = new LinkedQueue <Character>();
-    	q.enqueue('A');
-    	q.enqueue('B');
-    	q.enqueue('C');
-    	q.enqueue('D');
-    	q.enqueue('E');
-    	printQueue(q);
-    	split(q, oq, eq);
-    	System.out.print("ODD:  ");
-    	printQueue(oq);
-    	System.out.print("EVEN: ");
-    	printQueue(eq);
-    	printQueue(q);
+    	LinkedPQ<Character> pq = new LinkedPQ<Character>();
+    	pq.enqueue('A', 10);
+    	pq.enqueue('B', 5);
+    	pq.enqueue('C', 2);
+    	pq.enqueue('D', 8);
+    	pq.enqueue('E', 3);
+    	System.out.print("Before: ");
+    	printPQ(pq);
+    	remove(pq, 5);
+    	System.out.print("After: ");
+    	printPQ(pq);
     }
 }
