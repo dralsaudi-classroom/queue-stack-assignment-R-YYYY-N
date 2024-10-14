@@ -48,12 +48,19 @@ public class QueueStackTester {
     
     public static <T> boolean search(Stack<T> st, T e)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
         // Write the recursive static method search that searches for an element e in a stack st
         // and returns true if it’s found or false otherwise. st should not change at the end of
         // the method. You are not allowed to use any auxiliary data structures.
         // Example. Given the stack st (top-to-bottom): 5, 7, 5, 3, 2. search(st, 3) returns
         // true while search(st, 1) returns false.
+    	if(st.empty())
+    		return false;
+    	T tmp = st.pop();
+    	boolean flag = tmp.equals(e);
+    	if(!flag)
+    		flag = search(st, e);
+    	st.push(tmp);
+    	return flag;
     }
     
     public static boolean isOrdered(Queue<Integer> q) {
@@ -111,17 +118,23 @@ public class QueueStackTester {
     	}
     }
     
+    public static <T> void printStack(Stack<T> s) {
+    	if(s.empty())
+    		return;
+    	T tmp = s.pop();
+    	System.out.print(tmp + ", ");
+    	printStack(s);
+    	s.push(tmp);
+    }
+    
     public static void main(String args[]) {
-    	LinkedPQ<Character> pq = new LinkedPQ<Character>();
-    	pq.enqueue('A', 10);
-    	pq.enqueue('B', 5);
-    	pq.enqueue('C', 2);
-    	pq.enqueue('D', 8);
-    	pq.enqueue('E', 3);
-    	System.out.print("Before: ");
-    	printPQ(pq);
-    	remove(pq, 5);
-    	System.out.print("After: ");
-    	printPQ(pq);
+    	ArrayStack<Integer> st = new ArrayStack<Integer>(10);
+    	st.push(2);
+    	st.push(3);
+    	st.push(5);
+    	st.push(7);
+    	st.push(5);
+    	System.out.println(search(st,3));
+    	System.out.println(search(st,1));
     }
 }
